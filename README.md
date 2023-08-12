@@ -8,3 +8,5 @@ CalcGame:
 [![asciicast](https://asciinema.org/a/6ZWcpNvYwSPp7hGXvckKZdLf3.svg)](https://asciinema.org/a/6ZWcpNvYwSPp7hGXvckKZdLf3)
 GCDGame
 [![asciicast](https://asciinema.org/a/Do6mxXkVyNvC91IrtlqtfLq0z.svg)](https://asciinema.org/a/Do6mxXkVyNvC91IrtlqtfLq0z)
+ProgressionGame
+[![asciicast](https://asciinema.org/a/igAyeaQd4SBOTgWE4D0s6kBLf.svg)](https://asciinema.org/a/igAyeaQd4SBOTgWE4D0s6kBLf)
