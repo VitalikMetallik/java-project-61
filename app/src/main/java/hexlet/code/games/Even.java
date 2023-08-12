@@ -1,62 +1,38 @@
 package hexlet.code.games;
 
-import java.util.Random;
+import hexlet.code.Cli;
+import hexlet.code.Engine;
+
 import java.util.Scanner;
 
 public class Even {
-    private static final int MAX_QUESTIONS = 3;
 
-    public static void runGame() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name? ");
-        String userName = scanner.next();
-        System.out.println("Hello, " + userName + "!");
-
+    public static void evenGame() {
+        Cli.askUsername();
         System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
+        int count = 0; // Инициализация счетчика попыток
+        final int maxCount = 3;
+        String currentAnswer = "yes"; // Задание начального ответа
 
-        int correctAnswers = 0;
+        while (count < maxCount) { // Цикл для выполнения игры
+            Scanner answer = new Scanner(System.in);
+            final int number = (int) (Math.random() * 10); // Генерация случайного числа
+            final boolean checkAnswer = number % 2 == 0; // Проверка четности числа
 
-        while (correctAnswers < MAX_QUESTIONS) {
-            int randomNumber = generateRandomNumber();
-            System.out.println("Question: " + randomNumber);
-            System.out.print("Your answer: ");
-            String userAnswer = scanner.next();
+            System.out.println("Question: " + number);
+            String answerNext = answer.next();
 
-            if (isAnswerCorrect(randomNumber, userAnswer)) {
-                System.out.println("Correct!");
-                correctAnswers++;
-            } else {
-                System.out.println("'" + userAnswer + "' is wrong answer ;" + "(. Correct answer was '" + getCorrectAnswer(randomNumber) + "'.");
-                System.out.println("Let's try again, " + userName + "!");
+            if (!(checkAnswer)) {
+                currentAnswer = "no";
+            }
+            if (Engine.rightOrWrong(answerNext.equals(currentAnswer), currentAnswer, answerNext)) {
                 break;
             }
+
+            count++; // Увеличиваем счетчик правильных ответов
+            currentAnswer = "yes";
         }
 
-        if (correctAnswers == MAX_QUESTIONS) {
-            System.out.println("Congratulations, " + userName + "!");
-        }
-
-        scanner.close();
-    }
-
-    private static int generateRandomNumber() {
-        Random random = new Random();
-        return random.nextInt(101);
-    }
-
-    private static boolean isAnswerCorrect(int number, String answer) {
-        if (number % 2 == 0 && answer.equals("yes")) {
-            return true;
-        } else return number % 2 != 0 && answer.equals("no");
-    }
-
-    private static String getCorrectAnswer(int number) {
-        if (number % 2 == 0) {
-            return "yes";
-        } else {
-            return "no";
-        }
+        Engine.congratulations(count == maxCount);
     }
 }

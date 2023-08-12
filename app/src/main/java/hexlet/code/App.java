@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import hexlet.code.games.Even;
+import hexlet.code.games.Calc;
 
 import java.util.Scanner;
 
@@ -11,21 +12,16 @@ public class App {
         System.out.println("Please enter the game number and press Enter.");
         System.out.println("1 - Greet");
         System.out.println("2 - Even");
+        System.out.println("3 - Calc");
         System.out.println("0 - Exit");
-        System.out.print("Your choice: ");
-        // Получаем выбор пользователя
-        int choice = scanner.nextInt();
-
-        if (choice == 1) {
-            Cli.greetUser();
-        } else if (choice == 2) {
-            Even.runGame();
-        } else if (choice == 0) {
-            System.out.println("Exiting...");
-        } else {
-            System.out.println("Invalid choice");
+        System.out.println("Your choice: ");
+        int gameChoice = scanner.nextInt();
+        switch (gameChoice) {
+            case 0 -> scanner.close();
+            case 1 -> Cli.askUsername();
+            case 2 -> Even.evenGame();
+            case 3 -> Calc.calcGame();
+            default -> throw new RuntimeException("\"Invalid choice. Please try again.\" " + gameChoice);
         }
-
-        scanner.close();
     }
 }
