@@ -10,3 +10,5 @@ GCDGame
 [![asciicast](https://asciinema.org/a/Do6mxXkVyNvC91IrtlqtfLq0z.svg)](https://asciinema.org/a/Do6mxXkVyNvC91IrtlqtfLq0z)
 ProgressionGame
 [![asciicast](https://asciinema.org/a/igAyeaQd4SBOTgWE4D0s6kBLf.svg)](https://asciinema.org/a/igAyeaQd4SBOTgWE4D0s6kBLf)
+PrimeGame
+[![asciicast](https://asciinema.org/a/nzVJ9DoIyfHTDsJbKUvWu5UJQ.svg)](https://asciinema.org/a/nzVJ9DoIyfHTDsJbKUvWu5UJQ)
