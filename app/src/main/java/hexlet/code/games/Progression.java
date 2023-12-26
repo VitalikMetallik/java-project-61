@@ -1,68 +1,47 @@
+
 package hexlet.code.games;
 
-import hexlet.code.Cli;
 import hexlet.code.Engine;
-
-import java.util.Random;
-import java.util.Scanner;
+import hexlet.code.Utils;
 
 public class Progression {
+    public static final String DESCRIPTION = "What number is missing in the progression?";
 
-    static final Scanner ANSWER = new Scanner(System.in);
-
-    public static void progressionGame() {
-        Cli.askUsername();
-        System.out.println("What number is missing in the progression?");
-
-        int count = 0;
-        final int maxCount = 3;
-
-        while (count < maxCount) {
-            int[] progression = generateProgression();
-            int hiddenIndex = chooseHiddenIndex(progression.length);
-            int answerNum = progression[hiddenIndex];
-
-            System.out.println("Question: " + showProgression(progression, hiddenIndex));
-            String answerNext = ANSWER.next();
-
-            if (Engine.rightOrWrong(answerNext.equals(Integer.toString(answerNum)), "" + answerNum, answerNext)) {
-                break;
-            }
-
-            count++;
+    // Заполнение массива числовой прогрессией
+    static void fillArrayRandomProgression(String[] array) {
+        int firstNum = Utils.randomNum();
+        for (var i = 0; i < array.length; i++) {
+            array[i] = Integer.toString(firstNum + i);
         }
-
-        Engine.congratulations(count == maxCount);
+    }
+    // Преобразование массива чисел в строку
+    static String arrayToString(String[] array) {
+        return String.join(" ", array);
     }
 
-    public static int[] generateProgression() {
-        Random random = new Random();
-        int progressionLength = random.nextInt(6) + 5; // Генерируем длину прогрессии от 5 до 10
-        int progressionStep = random.nextInt(3) + 1; // Генерируем шаг прогрессии от 1 до 3
+    // Генерация вопроса и правильного ответа
+    static String[] questionAndAnswer() {
+        final int minNumbersLength = 5;
+        final int maxNumbersLength = 10;
+        int numbersLength = Utils.randomNum(minNumbersLength, maxNumbersLength);
+        String[] numbers = new String[numbersLength];
+        fillArrayRandomProgression(numbers);
 
-        int[] progression = new int[progressionLength];
+        int placeOfMissingNumber = Utils.randomNum(0, numbersLength);
+        String correctAnswer = numbers[placeOfMissingNumber];
+        numbers[placeOfMissingNumber] = "..";
 
-        for (int i = 0; i < progressionLength; i++) {
-            progression[i] = i * progressionStep + random.nextInt(progressionStep); // Генерируем число прогрессии
-        }
-
-        return progression;
+        String question = arrayToString(numbers);
+        return new String[]{question, correctAnswer};
     }
 
-    public static int chooseHiddenIndex(int length) {
-        Random random = new Random();
-        return random.nextInt(length);
-    }
-
-    public static String showProgression(int[] progression, int hiddenIndex) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < progression.length; i++) {
-            if (i == hiddenIndex) {
-                sb.append(".. ");
-            } else {
-                sb.append(progression[i]).append(" ");
-            }
+    // Запуск игры
+    public static void runGame() {
+        int arraysCount = Engine.ROUNDS_COUNT;
+        String[][] dataForGame = new String[arraysCount][2];
+        for (int i = 0; i < arraysCount; i++) {
+            dataForGame[i] = questionAndAnswer();
         }
-        return sb.toString().trim();
+        Engine.gameEngine(DESCRIPTION, dataForGame);
     }
 }

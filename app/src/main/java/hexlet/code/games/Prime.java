@@ -1,55 +1,41 @@
 package hexlet.code.games;
 
-import hexlet.code.Cli;
 import hexlet.code.Engine;
-
-import java.util.Scanner;
+import hexlet.code.Utils;
 
 public class Prime {
+    public static final String DESCRIPTION = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-    private static boolean isPrime(int number) {
-        if (number <= 1) {
+    // Функция для проверки является ли число простым
+    static boolean isPrime(int num) {
+        if (num <= 1) {
             return false;
         }
-
-        for (int i = 2; i <= Math.sqrt(number); i++) {
-            if (number % i == 0) {
+        for (int i = 2; i <= num / 2; i += 1) {
+            if (num % i == 0) {
                 return false;
             }
         }
-
         return true;
     }
 
-    public static void primeGame() {
-        Cli.askUsername();
-        System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
+    // Функция для создания вопроса и ответа
+    static String[] questionAndAnswer() {
+        int number = Utils.randomNum();
+        String question = Integer.toString(number);
+        String correctAnswer = isPrime(number) ? "yes" : "no";
+        return new String[]{question, correctAnswer};
+    }
 
-        int count = 0;
-        final int maxCount = 3;
-        String currentAnswer = "yes";
-
-        while (count < maxCount) {
-            Scanner scanner = new Scanner(System.in);
-
-            final int question = (int) (Math.random() * 100);
-            final boolean checkAnswer = isPrime(question);
-
-            System.out.println("Question: " + question);
-            String answer = scanner.next();
-
-            if (!checkAnswer) {
-                currentAnswer = "no";
-            }
-
-            if (Engine.rightOrWrong(answer.equals(currentAnswer), currentAnswer, answer)) {
-                break;
-            }
-
-            count++;
-            currentAnswer = "yes";
+    // Функция для запуска игры
+    public static void runGame() {
+        int arraysCount = Engine.ROUNDS_COUNT;
+        String[][] dataForGame = new String[arraysCount][2];
+        for (var item : dataForGame) {
+            String[] data = questionAndAnswer();
+            item[0] = data[0];
+            item[1] = data[1];
         }
-
-        Engine.congratulations(count == maxCount);
+        Engine.gameEngine(DESCRIPTION, dataForGame);
     }
 }

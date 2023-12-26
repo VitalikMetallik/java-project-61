@@ -1,44 +1,37 @@
 package hexlet.code.games;
 
-import hexlet.code.Cli;
 import hexlet.code.Engine;
-
-import java.util.Scanner;
+import hexlet.code.Utils;
 
 public class GCD {
+    public static final String DESCRIPTION = "Find the greatest common divisor of given numbers.";
 
-    public static void gcdGame() {
-        Cli.askUsername();
-        System.out.println("Find the greatest common divisor of given numbers.");
-
-        int count = 0;
-        final int maxCount = 3;
-
-        while (count < maxCount) {
-            Scanner answer = new Scanner(System.in);
-            final int number1 = (int) ((Math.random() * 100) + 1);
-            final int number2 = (int) ((Math.random() * 100) + 1);
-            int result = gcd(number1, number2);
-
-            System.out.println("Question: " + number1 + " " + number2);
-            int answerNext;
-            answerNext = answer.nextInt();
-
-            if (Engine.rightOrWrong(answerNext == result, result, answerNext)) {
-                break;
-            }
-
-            count++;
+    //Метод для нахождения наибольшего общего делителя
+    static int gcdOfNumbers(int n1, int n2) {
+        if (n2 == 0) {
+            return n1;
         }
-
-        Engine.congratulations(count == maxCount);
-
+        return gcdOfNumbers(n2, n1 % n2);
     }
 
-    public static int gcd(int number1, int number2) {
-        if (number2 == 0) {
-            return number1;
+    // Метод для генерации вопроса и правильного ответа
+    static String[] questionAndAnswer() {
+        int num1 = Utils.randomNum();
+        int num2 = Utils.randomNum();
+        String question = num1 + " " + num2;
+        String correctAnswer = Integer.toString(gcdOfNumbers(num1, num2));
+        return new String[]{question, correctAnswer};
+    }
+
+    // Метод для запуска игры
+    public static void runGame() {
+        int arraysCount = Engine.ROUNDS_COUNT;
+        String[][] dataForGame = new String[arraysCount][2];
+        for (var item : dataForGame) {
+            String[] data = questionAndAnswer();
+            item[0] = data[0];
+            item[1] = data[1];
         }
-        return gcd(number2, number1 % number2);
+        Engine.gameEngine(DESCRIPTION, dataForGame);
     }
 }

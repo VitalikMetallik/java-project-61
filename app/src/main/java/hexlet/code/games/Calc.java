@@ -1,58 +1,54 @@
+
 package hexlet.code.games;
 
-import hexlet.code.Cli;
 import hexlet.code.Engine;
-
-import java.util.Scanner;
+import hexlet.code.Utils;
 
 public class Calc {
+    public static final String DESCRIPTION = "What is the result of the expression?";
 
-    static String question;
-
-    public static void calcGame() {
-        Cli.askUsername();
-        System.out.println("What is the result of the expression?");
-
-        int count = 0; // Счетчик правильных ответов
-        final int maxCount = 3; // Максимальное количество вопросов
-
-        while (count < maxCount) {
-            Scanner answer = new Scanner(System.in); // Создаем сканнер для получения ответов пользователя
-            int result = getResult(); // Генерируем и получаем правильный ответ на текущий вопрос
-
-            System.out.println(question); // Выводим текущий вопрос в консоль
-            final int answerNext = answer.nextInt(); // Получаем ответ пользователя
-
-            if (Engine.rightOrWrong(answerNext == result, result, answerNext)) {
-                break; // Если ответ правильный, выходим из цикла
-            }
-
-            count++; // Увеличиваем счетчик правильных ответов
-        }
-
-        Engine.congratulations(count == maxCount);
+    // Генерация случайного оператора
+    static String randomOperator() {
+        String[] operators = {"+", "-", "*"};
+        return operators[Utils.randomNum(0, 2)];
     }
 
-    private static int getResult() {
-
-        final int number1 = (int) (Math.random() * 100); // Генерируем первое число от 0 до 99
-        final int number2 = (int) (Math.random() * 100); // Генерируем второе число от 0 до 99
-        final int choiceAction = (int) (Math.random() * 3);
-        String action = " + "; // По умолчанию операция сложения
-
-        if (choiceAction == 0) {
-            action = " - "; // Задаем операцию вычитания
-        } else if (choiceAction == 1) {
-            action = " * ";  // Задаем операцию умножения
+    // Получение правильного ответа на основе оператора и чисел
+    static String correctAnswer(String operator, int num1, int num2) {
+        switch (operator) {
+            case "+" -> {
+                return Integer.toString(num1 + num2);
+            }
+            case "-" -> {
+                return Integer.toString(num1 - num2);
+            }
+            case "*" -> {
+                return Integer.toString(num1 * num2);
+            }
+            default -> {
+                return "";
+            }
         }
+    }
 
-        question = "Question: " + number1 + action + number2; // Формируем вопрос с текущими числами и операцией
+    // Генерация вопроса и правильного ответа
+    static String[] questionAndAnswer() {
+        int num1 = Utils.randomNum();
+        int num2 = Utils.randomNum();
+        String operator = randomOperator();
+        String question = num1 + " " + operator + " " + num2;
+        String correctAnswer = correctAnswer(operator, num1, num2);
+        return new String[]{question, correctAnswer};
+    }
 
-        return switch (choiceAction) {
-            case 0 -> number1 - number2; // Возвращаем правильный ответ для операции вычитания
-            case 1 -> number1 * number2; // Возвращаем правильный ответ для операции умножения
-            default -> number1 + number2; // Возвращаем правильный ответ для операции сложения
-        };
-
+    // Запуск игры
+    public static void runGame() {
+        String[][] dataForGame = new String[Engine.ROUNDS_COUNT][2];
+        for (int i = 0; i < Engine.ROUNDS_COUNT; i++) {
+            String[] data = questionAndAnswer();
+            dataForGame[i][0] = data[0];
+            dataForGame[i][1] = data[1];
+        }
+        Engine.gameEngine(DESCRIPTION, dataForGame);
     }
 }
