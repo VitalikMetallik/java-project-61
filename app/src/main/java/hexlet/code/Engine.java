@@ -6,7 +6,7 @@ public class Engine {
     public static final int ROUNDS_COUNT = 3;
 
     // Логика игрового движка
-    public static void gameEngine(String description, String[][] generateQuestionAndAnswer) {
+    public static void gameEngine(String description, String[][] questionsAndAnswers) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nWelcome to the Brain Games!");
         System.out.print("May I have your name? ");
@@ -14,7 +14,7 @@ public class Engine {
         System.out.println("Hello, " + userName + "!");
         System.out.println(description);
 
-        for (String[] item : generateQuestionAndAnswer) {
+        for (String[] item : questionsAndAnswers) {
             System.out.println("Question: " + item[0]);
             System.out.print("Your answer: ");
             String userAnswer = scanner.next();
