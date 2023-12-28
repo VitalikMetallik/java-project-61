@@ -33,11 +33,11 @@ public class App {
         switch (gameChoice) {
             case GAME_CHOICE_EXIT -> scanner.close();
             case GAME_CHOICE_GREET -> Cli.askUsername();
-            case GAME_CHOICE_EVEN -> Even.runGame();
-            case GAME_CHOICE_CALC -> Calc.runGame();
-            case GAME_CHOICE_GCD -> GCD.runGame();
-            case GAME_CHOICE_PROGRESSION -> Progression.runGame();
-            case GAME_CHOICE_PRIME -> Prime.runGame();
+            case GAME_CHOICE_EVEN -> Even.runEvenGame();
+            case GAME_CHOICE_CALC -> Calc.runCalcGame();
+            case GAME_CHOICE_GCD -> GCD.runGCDGame();
+            case GAME_CHOICE_PROGRESSION -> Progression.runProgressionGame();
+            case GAME_CHOICE_PRIME -> Prime.runPrimeGame();
             default -> throw new RuntimeException("\"Invalid choice. Please try again.\" " + gameChoice);
         }
     }

@@ -9,7 +9,7 @@ public class Progression {
     private static final int MAX_NUMBER = 100;
 
     // Генерация вопроса и ответа
-    static String[] generateQuestionAndAnswer() {
+    static String[] generateQuestionAndAnswerProgression() {
         final int minNumbersLength = 5;
         final int maxNumbersLength = 10;
         int numbersLength = Utils.generateRandomNum(minNumbersLength, maxNumbersLength);
@@ -34,11 +34,11 @@ public class Progression {
     }
 
     // Запуск игры
-    public static void runGame() {
+    public static void runProgressionGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
         for (int i = 0; i < arraysCount; i++) {
-            dataForGame[i] = generateQuestionAndAnswer();
+            dataForGame[i] = generateQuestionAndAnswerProgression();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

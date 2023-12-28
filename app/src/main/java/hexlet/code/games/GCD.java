@@ -17,7 +17,7 @@ public class GCD {
     }
 
     // Генерация вопроса и ответа
-    static String[] generateQuestionAndAnswer() {
+    static String[] generateQuestionAndAnswerGCD() {
         int num1 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         int num2 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String question = num1 + " " + num2;
@@ -26,11 +26,11 @@ public class GCD {
     }
 
     // Запуск игры
-    public static void runGame() {
+    public static void runGCDGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
         for (int i = 0; i < arraysCount; i++) {
-            dataForGame[i] = generateQuestionAndAnswer();
+            dataForGame[i] = generateQuestionAndAnswerGCD();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

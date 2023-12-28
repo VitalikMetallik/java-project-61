@@ -22,7 +22,7 @@ public class Prime {
     }
 
     // Генерация вопроса и ответа
-    static String[] generateQuestionAndAnswer() {
+    static String[] generateQuestionAndAnswerPrime() {
         int number = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String question = Integer.toString(number);
         String correctAnswer = isPrime(number) ? "yes" : "no";
@@ -30,11 +30,11 @@ public class Prime {
     }
 
     // Запуск игры
-    public static void runGame() {
+    public static void runPrimeGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
         for (int i = 0; i < arraysCount; i++) {
-            dataForGame[i] = generateQuestionAndAnswer();
+            dataForGame[i] = generateQuestionAndAnswerPrime();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

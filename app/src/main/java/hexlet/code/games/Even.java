@@ -14,7 +14,7 @@ public class Even {
     }
 
     // Генерация вопроса и ответа
-    static String[] generateQuestionAndAnswer() {
+    static String[] generateQuestionAndAnswerEven() {
         int number = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String question = Integer.toString(number);
         String correctAnswer = isEven(number) ? "yes" : "no";
@@ -22,11 +22,11 @@ public class Even {
     }
 
     // Запуск игры
-    public static void runGame() {
+    public static void runEvenGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
         for (int i = 0; i < arraysCount; i++) {
-            dataForGame[i] = generateQuestionAndAnswer();
+            dataForGame[i] = generateQuestionAndAnswerEven();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

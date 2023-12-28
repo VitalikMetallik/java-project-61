@@ -32,7 +32,7 @@ public class Calc {
     }
 
     // Генерация вопроса и ответа
-    static String[] generateQuestionAndAnswer() {
+    static String[] generateQuestionAndAnswerCalc() {
         int num1 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         int num2 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String operator = randomOperator();
@@ -42,11 +42,11 @@ public class Calc {
     }
 
     // Запуск игры
-    public static void runGame() {
+    public static void runCalcGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
         for (int i = 0; i < arraysCount; i++) {
-            dataForGame[i] = generateQuestionAndAnswer();
+            dataForGame[i] = generateQuestionAndAnswerCalc();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }
