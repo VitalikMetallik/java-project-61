@@ -5,6 +5,8 @@ import hexlet.code.Utils;
 
 public class Even {
     public static final String DESCRIPTION = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+    private static final int MIN_NUMBER = 0;
+    private static final int MAX_NUMBER = 100;
 
     // Функция для проверки числа на чётность
     static boolean isEven(int num) {
@@ -13,7 +15,7 @@ public class Even {
 
     // Генерация вопроса и ответа
     static String[] generateQuestionAndAnswer() {
-        int number = Utils.generateRandomNum(0, 100);
+        int number = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String question = Integer.toString(number);
         String correctAnswer = isEven(number) ? "yes" : "no";
         return new String[]{question, correctAnswer};

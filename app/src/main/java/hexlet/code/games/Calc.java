@@ -6,6 +6,8 @@ import hexlet.code.Utils;
 
 public class Calc {
     public static final String DESCRIPTION = "What is the result of the expression?";
+    private static final int MIN_NUMBER = 0;
+    private static final int MAX_NUMBER = 100;
 
     // Генерация случайного оператора
     static String randomOperator() {
@@ -31,8 +33,8 @@ public class Calc {
 
     // Генерация вопроса и ответа
     static String[] generateQuestionAndAnswer() {
-        int num1 = Utils.generateRandomNum(0, 100);
-        int num2 = Utils.generateRandomNum(0, 100);
+        int num1 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
+        int num2 = Utils.generateRandomNum(MIN_NUMBER, MAX_NUMBER);
         String operator = randomOperator();
         String question = num1 + " " + operator + " " + num2;
         String correctAnswer = correctAnswer(operator, num1, num2);
