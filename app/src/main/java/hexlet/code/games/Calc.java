@@ -10,7 +10,7 @@ public class Calc {
     // Генерация случайного оператора
     static String randomOperator() {
         String[] operators = {"+", "-", "*"};
-        return operators[Utils.randomNum(0, 2)];
+        return operators[Utils.generateRandomNum(0, 2)];
     }
 
     // Получение правильного ответа на основе оператора и чисел
@@ -25,16 +25,14 @@ public class Calc {
             case "*" -> {
                 return Integer.toString(num1 * num2);
             }
-            default -> {
-                return "";
-            }
+            default -> throw new IllegalArgumentException("Invalid operator");
         }
     }
 
-    // Генерация вопроса и правильного ответа
-    static String[] questionAndAnswer() {
-        int num1 = Utils.randomNum();
-        int num2 = Utils.randomNum();
+    // Генерация вопроса и ответа
+    static String[] generateQuestionAndAnswer() {
+        int num1 = Utils.generateRandomNum(0, 100);
+        int num2 = Utils.generateRandomNum(0, 100);
         String operator = randomOperator();
         String question = num1 + " " + operator + " " + num2;
         String correctAnswer = correctAnswer(operator, num1, num2);
@@ -43,11 +41,10 @@ public class Calc {
 
     // Запуск игры
     public static void runGame() {
-        String[][] dataForGame = new String[Engine.ROUNDS_COUNT][2];
-        for (int i = 0; i < Engine.ROUNDS_COUNT; i++) {
-            String[] data = questionAndAnswer();
-            dataForGame[i][0] = data[0];
-            dataForGame[i][1] = data[1];
+        int arraysCount = Engine.ROUNDS_COUNT;
+        String[][] dataForGame = new String[arraysCount][2];
+        for (int i = 0; i < arraysCount; i++) {
+            dataForGame[i] = generateQuestionAndAnswer();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

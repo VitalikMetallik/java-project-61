@@ -19,22 +19,20 @@ public class Prime {
         return true;
     }
 
-    // Функция для создания вопроса и ответа
-    static String[] questionAndAnswer() {
-        int number = Utils.randomNum();
+    // Генерация вопроса и ответа
+    static String[] generateQuestionAndAnswer() {
+        int number = Utils.generateRandomNum(0, 100);
         String question = Integer.toString(number);
         String correctAnswer = isPrime(number) ? "yes" : "no";
         return new String[]{question, correctAnswer};
     }
 
-    // Функция для запуска игры
+    // Запуск игры
     public static void runGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
-        for (var item : dataForGame) {
-            String[] data = questionAndAnswer();
-            item[0] = data[0];
-            item[1] = data[1];
+        for (int i = 0; i < arraysCount; i++) {
+            dataForGame[i] = generateQuestionAndAnswer();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }

@@ -1,4 +1,3 @@
-
 package hexlet.code;
 
 import java.util.Scanner;
@@ -24,11 +23,9 @@ public class Engine {
             } else {
                 System.out.println("'" + userAnswer + "' is wrong answer ;(. Correct answer was '" + item[1] + "'.");
                 System.out.println("Let's try again, " + userName + "!");
-                scanner.close();
                 return;
             }
         }
         System.out.println("Congratulations, " + userName + "!");
-        scanner.close();
     }
 }

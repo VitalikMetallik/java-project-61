@@ -14,23 +14,21 @@ public class GCD {
         return gcdOfNumbers(n2, n1 % n2);
     }
 
-    // Метод для генерации вопроса и правильного ответа
-    static String[] questionAndAnswer() {
-        int num1 = Utils.randomNum();
-        int num2 = Utils.randomNum();
+    // Генерация вопроса и ответа
+    static String[] generateQuestionAndAnswer() {
+        int num1 = Utils.generateRandomNum(0, 100);
+        int num2 = Utils.generateRandomNum(0, 100);
         String question = num1 + " " + num2;
         String correctAnswer = Integer.toString(gcdOfNumbers(num1, num2));
         return new String[]{question, correctAnswer};
     }
 
-    // Метод для запуска игры
+    // Запуск игры
     public static void runGame() {
         int arraysCount = Engine.ROUNDS_COUNT;
         String[][] dataForGame = new String[arraysCount][2];
-        for (var item : dataForGame) {
-            String[] data = questionAndAnswer();
-            item[0] = data[0];
-            item[1] = data[1];
+        for (int i = 0; i < arraysCount; i++) {
+            dataForGame[i] = generateQuestionAndAnswer();
         }
         Engine.gameEngine(DESCRIPTION, dataForGame);
     }
